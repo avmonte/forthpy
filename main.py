@@ -1,3 +1,11 @@
+finalLines = []
+with open('input.txt', 'r') as file:
+    lines = file.readlines()
+    for i in range(len(lines)):
+        lines[i] = lines[i].replace('\n', ' ')
+        finalLines.append(lines[i].split())
 
-with open('../input.txt', 'w') as file:
-    print('yo')
+print(finalLines)
+with open('output.txt', 'w') as file:
+    pass
+
