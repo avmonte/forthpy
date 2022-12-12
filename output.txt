@@ -1,9 +1,19 @@
 _start:
 	push 8
+
 	push 8
+
+	pop %rax, %rdx
+	pop %rax, %rcx
+	add $rdx, %rcx
+	push %rcx
+
 	push %rax
+
 	pop %rax, %rdx
 	pop %rax, %rcx
 	push $rdx
 	push %rcx
+
 	ret
+
