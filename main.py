@@ -1,7 +1,7 @@
 import numpy
 
 # init
-with open('output.txt', 'w') as file:
+with open('output.s', 'w') as file:
     file.write('\n.global _start\n\n_start:\n')
 
 finalLines = []
@@ -16,7 +16,7 @@ print(finalLines)
 
 
 def add(com):
-    with open('output.txt', 'a') as file:
+    with open('output.s', 'a') as file:
         file.write(com + '\n')
 
 
