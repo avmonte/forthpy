@@ -1,3 +1,6 @@
+
+.global _start
+
 _start:
 	push 8
 

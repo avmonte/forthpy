@@ -2,7 +2,7 @@ import numpy
 
 # init
 with open('output.txt', 'w') as file:
-    file.write('_start:\n')
+    file.write('\n.global _start\n\n_start:\n')
 
 finalLines = []
 with open('input.txt') as file:
