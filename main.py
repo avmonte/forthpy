@@ -24,15 +24,27 @@ for i in finalLines:
     if str(i).isdigit():
         add('\tpush ' + i + '\n')
     elif str(i) in '+':
-        add('\tpop %rsp, %rdx\n\tpop %rsp, %rcx\n\tadd $rdx, %rcx\n\tpush %rcx\n')
+        add('\tpop %rsp, %rdx\n'
+            '\tpop %rsp, %rcx\n'
+            '\tadd $rdx, %rcx\n'
+            '\tpush %rcx\n')
     elif str(i) in '-':
-        add('\tpop %rsp, %rdx\n\tpop %rsp, %rcx\n\tsub $rdx, %rcx\n\tpush %rcx\n')
+        add('\tpop %rsp, %rdx\n'
+            '\tpop %rsp, %rcx\n'
+            '\tsub $rdx, %rcx\n'
+            '\tpush %rcx\n')
     elif str(i) in '*':
-        add('\tpop %rsp, %rdx\n\tpop %rsp, %rcx\n\timul $rdx, %rcx\n\tpush %rcx\n')
+        add('\tpop %rsp, %rdx\n'
+            '\tpop %rsp, %rcx\n'
+            '\timul $rdx, %rcx\n'
+            '\tpush %rcx\n')
     elif str(i) == 'dup':
         add('\tpush %rsp\n')
     elif str(i) == 'swap':
-        add('\tpop %rsp, %rdx\n\tpop %rsp, %rcx\n\tpush $rdx\n\tpush %rcx\n')
+        add('\tpop %rsp, %rdx\n'
+            '\tpop %rsp, %rcx\n'
+            '\tpush $rdx\n'
+            '\tpush %rcx\n')
 
 # exit
 add('\tret\n')
