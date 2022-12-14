@@ -2,19 +2,23 @@
 .global _start
 
 _start:
-	push 8
+	push $8
 
-	push 8
+	push $8
 
-	pop %rsp, %rdx
-	pop %rsp, %rcx
+	pop %rdx
+	pop %rcx
+
 	add $rdx, %rcx
+
 	push %rcx
 
-	push %rsp
+	pop %rdx
+	push %rdx
+	push %rdx
 
-	pop %rsp, %rdx
-	pop %rsp, %rcx
+	pop %rdx
+	pop %rcx
 	push $rdx
 	push %rcx
 

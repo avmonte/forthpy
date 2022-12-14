@@ -1,5 +1,7 @@
 import numpy
 
+# TODO sys input
+
 # init
 with open('output.s', 'w') as file:
     file.write('\n.global _start\n\n_start:\n')
@@ -20,31 +22,36 @@ def add(com):
         file.write(com + '\n')
 
 
+def opers():
+    add('\tpop %rdx\n''\tpop %rcx\n')
+
+    match str(i):
+        case '+':
+            add('\tadd $rdx, %rcx\n')
+        case '-':
+            add('\tsub $rdx, %rcx\n')
+        case '*':
+            add('\timul $rdx, %rcx\n')
+
+    add('\tpush %rcx\n')
+
+
 for i in finalLines:
     if str(i).isdigit():
-        add('\tpush ' + i + '\n')
-    elif str(i) in '+':
-        add('\tpop %rsp, %rdx\n'
-            '\tpop %rsp, %rcx\n'
-            '\tadd $rdx, %rcx\n'
-            '\tpush %rcx\n')
-    elif str(i) in '-':
-        add('\tpop %rsp, %rdx\n'
-            '\tpop %rsp, %rcx\n'
-            '\tsub $rdx, %rcx\n'
-            '\tpush %rcx\n')
-    elif str(i) in '*':
-        add('\tpop %rsp, %rdx\n'
-            '\tpop %rsp, %rcx\n'
-            '\timul $rdx, %rcx\n'
-            '\tpush %rcx\n')
+        add('\tpush $' + i + '\n')
+    elif str(i) in '+-*':
+        opers()
     elif str(i) == 'dup':
-        add('\tpush %rsp\n')
+        add('\tpop %rdx\n\tpush %rdx\n\tpush %rdx\n')
     elif str(i) == 'swap':
-        add('\tpop %rsp, %rdx\n'
-            '\tpop %rsp, %rcx\n'
+        add('\tpop %rdx\n'
+            '\tpop %rcx\n'
             '\tpush $rdx\n'
             '\tpush %rcx\n')
 
+# TODO print : .s
+
 # exit
 add('\tret\n')
+
+# TODO os.system()
