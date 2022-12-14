@@ -17,21 +17,21 @@ finalLines = list(numpy.concatenate(finalLines).flat)
 print(finalLines)
 
 
-def add(com):
+def add(com, endline='\n'):
     with open('output.s', 'a') as file:
-        file.write(com + '\n')
+        file.write(com + endline)
 
 
 def opers():
-    add('\tpop %rdx\n''\tpop %rcx\n')
+    add('\tpop %rdx\n''\tpop %rcx\n', endline='')
 
     match str(i):
         case '+':
-            add('\tadd $rdx, %rcx\n')
+            add('\tadd $rdx, %rcx\n', endline='')
         case '-':
-            add('\tsub $rdx, %rcx\n')
+            add('\tsub $rdx, %rcx\n', endline='')
         case '*':
-            add('\timul $rdx, %rcx\n')
+            add('\timul $rdx, %rcx\n', endline='')
 
     add('\tpush %rcx\n')
 
@@ -42,7 +42,9 @@ for i in finalLines:
     elif str(i) in '+-*':
         opers()
     elif str(i) == 'dup':
-        add('\tpop %rdx\n\tpush %rdx\n\tpush %rdx\n')
+        add('\tpop %rdx\n'
+            '\tpush %rdx\n'
+            '\tpush %rdx\n')
     elif str(i) == 'swap':
         add('\tpop %rdx\n'
             '\tpop %rcx\n'

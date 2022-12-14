@@ -8,9 +8,7 @@ _start:
 
 	pop %rdx
 	pop %rcx
-
 	add $rdx, %rcx
-
 	push %rcx
 
 	pop %rdx
