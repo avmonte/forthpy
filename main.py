@@ -1,13 +1,19 @@
+import sys
+
 import numpy
+import os
 
 # TODO sys input
 
+inputFile = sys.argv[1]
+outputFile = inputFile.split('.')[0] + '.s'
+
 # init
-with open('output.s', 'w') as file:
+with open(outputFile, 'w') as file:
     file.write('\n.global _start\n\n_start:\n')
 
 finalLines = []
-with open('input.txt') as file:
+with open(inputFile) as file:
     lines = file.readlines()
     for i in range(len(lines)):
         lines[i] = lines[i].replace('\n', ' ')
@@ -18,7 +24,7 @@ print(finalLines)
 
 
 def add(com, endline='\n'):
-    with open('output.s', 'a') as file:
+    with open(outputFile, 'a') as file:
         file.write(com + endline)
 
 
