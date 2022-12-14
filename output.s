@@ -8,7 +8,7 @@ _start:
 
 	pop %rdx
 	pop %rcx
-	add $rdx, %rcx
+	add %rdx, %rcx
 	push %rcx
 
 	pop %rdx
@@ -17,7 +17,7 @@ _start:
 
 	pop %rdx
 	pop %rcx
-	push $rdx
+	push %rdx
 	push %rcx
 
 	ret

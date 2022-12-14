@@ -27,11 +27,11 @@ def opers():
 
     match str(i):
         case '+':
-            add('\tadd $rdx, %rcx\n', endline='')
+            add('\tadd %rdx, %rcx\n', endline='')
         case '-':
-            add('\tsub $rdx, %rcx\n', endline='')
+            add('\tsub %rdx, %rcx\n', endline='')
         case '*':
-            add('\timul $rdx, %rcx\n', endline='')
+            add('\timul %rdx, %rcx\n', endline='')
 
     add('\tpush %rcx\n')
 
@@ -48,7 +48,7 @@ for i in finalLines:
     elif str(i) == 'swap':
         add('\tpop %rdx\n'
             '\tpop %rcx\n'
-            '\tpush $rdx\n'
+            '\tpush %rdx\n'
             '\tpush %rcx\n')
 
 # TODO print : .s
