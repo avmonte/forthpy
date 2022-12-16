@@ -1,14 +1,21 @@
+import os
 import sys
 import numpy
-import os
 
 # command-line run with 1 argument
-inputFile = sys.argv[1]
+if len(sys.argv) > 1:
+    inputFile = sys.argv[1]
+else:
+    inputFile = 'app.txt'
 outputFile = inputFile.split('.')[0] + '.s'
 
 # output file init
 with open(outputFile, 'w') as file:
-    file.write('\n.global _start\n\n_start:\n')
+    file.write('\n'
+               '.section .text\n'
+               '.globl _start\n'
+               '\n'
+               '_start:\n')
 
 finalLines = []
 with open(inputFile) as file:
@@ -70,3 +77,6 @@ for i in finalLines:
 add('\tret\n')
 
 # TODO os.system()
+os.system('as -o ' + outputFile.split('.')[0] + '.o' + outputFile)
+os.system('ld -o ' + outputFile.split('.')[0] + ' ' + outputFile.split('.')[0] + '.o')
+
