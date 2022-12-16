@@ -67,8 +67,8 @@ def main():
                 case 'drop':
                     append('\tpop %rdx\n')
                 case '.s':
-                    append('\t  .fmt\n:'
-                           '\t\t.asciz "%d\n"'
+                    append('\t  .fmt:\n'
+                           '\t\t.asciz "%d"\n'
                            '\t.text\n'
                            '\tmovq $.fmt, %rdi\n'
                            '\tcall printf\n')
