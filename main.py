@@ -74,7 +74,9 @@ for i in finalLines:
 # TODO print : .s
 
 # exit
-add('\tret\n')
+add('\tmov $60, %rax\n'
+    '\tpop %rdi\n'
+    '\tsyscall\n')
 
 # TODO os.system()
 os.system('as -o ' + outputFile.split('.')[0] + '.o' + outputFile)
