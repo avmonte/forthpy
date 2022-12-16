@@ -53,7 +53,7 @@ def main():
     for i in commands:
         if str(i).isdigit():
             append('\tpush $' + i + '\n')
-        elif str(i) in '+-*':
+        elif str(i) in '+-*/':
             operations(str(i))
         else:
             match str(i):
