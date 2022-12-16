@@ -66,6 +66,12 @@ def main():
                            '\tpush %rcx\n')
                 case 'drop':
                     append('\tpop %rdx\n')
+                case '.s':
+                    append('\t  .fmt\n:'
+                           '\t\t.asciz "%d\n"'
+                           '\t.text\n'
+                           '\tmovq $.fmt, %rdi\n'
+                           '\tcall printf\n')
 
                 # TODO check if any conflicts between operations use of registers
 
@@ -89,4 +95,8 @@ main()
 
 # TODO debug
 os.system('as -o ' + output_file.split('.')[0] + '.o ' + output_file)
-os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o')
+
+extra = ''
+if '.s' in commands:
+    extra = ' -lc -dynamic-linker /lib64/ld-linux-x86-64.so.2'
+os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o' + extra)
