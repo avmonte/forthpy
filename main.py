@@ -89,6 +89,6 @@ output_file = input_file.split('.')[0] + '.s'
 # start
 main()
 
-# TODO os.system()
-os.system('as -o ' + output_file.split('.')[0] + '.o' + output_file)
+# TODO debug
+os.system('as -o ' + output_file.split('.')[0] + '.o ' + output_file)
 os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o')
