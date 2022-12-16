@@ -67,13 +67,8 @@ def main():
                 case 'drop':
                     append('\tpop %rdx\n')
                 case '.s':
-                    append('\t.fmt:\n'
-                           '\t\t.asciz "%d"\n'
-                           '\t.text\n'
-                           '\tmovq $.fmt, %rdi\n'
+                    append('\tmov %rsp, %rdi\n'
                            '\tcall printf\n')
-
-                # TODO check if any conflicts between operations use of registers
 
                 # TODO print : .s
 
@@ -93,7 +88,7 @@ output_file = input_file.split('.')[0] + '.s'
 # start
 main()
 
-# TODO debug
+# creation the executable
 os.system('as -o ' + output_file.split('.')[0] + '.o ' + output_file)
 
 extra = ''
