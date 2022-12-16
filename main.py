@@ -2,83 +2,93 @@ import os
 import sys
 import numpy
 
-# command-line run with 1 argument
-if len(sys.argv) > 1:
-    inputFile = sys.argv[1]
-else:
-    inputFile = 'app.txt'
-outputFile = inputFile.split('.')[0] + '.s'
-
-# output file init
-with open(outputFile, 'w') as file:
-    file.write('\n'
-               '.section .text\n'
-               '.globl _start\n'
-               '\n'
-               '_start:\n')
-
-finalLines = []
-with open(inputFile) as file:
-    lines = file.readlines()
-    for i in range(len(lines)):
-        lines[i] = lines[i].replace('\n', ' ')
-        finalLines.append(lines[i].split())
-
-finalLines = list(numpy.concatenate(finalLines).flat)
-print(finalLines)
+commands = []
 
 
-def add(com, endline='\n'):
-    with open(outputFile, 'a') as file:
+def append(com, endline='\n'):
+    with open(output_file, 'a') as file:
         file.write(com + endline)
 
 
-def opers():
-    add('\tpop %rdx\n''\tpop %rcx\n', endline='')
+def operations(command):
+    append('\tpop %rdx\n''\tpop %rcx\n', endline='')
 
-    match str(i):
+    match command:
         case '+':
-            add('\tadd %rdx, %rcx\n', endline='')
+            append('\tadd %rdx, %rcx\n', endline='')
         case '-':
-            add('\tsub %rdx, %rcx\n', endline='')
+            append('\tsub %rdx, %rcx\n', endline='')
         case '*':
-            add('\timul %rdx, %rcx\n', endline='')
+            append('\timul %rdx, %rcx\n', endline='')
         case '/':
-            add('\tdiv %rdx, %rcx\n', endline='')
+            append('\tdiv %rdx, %rcx\n', endline='')
 
-    add('\tpush %rcx\n')
-
-
-for i in finalLines:
-    if str(i).isdigit():
-        add('\tpush $' + i + '\n')
-    elif str(i) in '+-*':
-        opers()
-    else:
-        match str(i):
-            case 'dup':
-                add('\tpop %rdx\n'
-                    '\tpush %rdx\n'
-                    '\tpush %rdx\n')
-            case 'swap':
-                add('\tpop %rdx\n'
-                    '\tpop %rcx\n'
-                    '\tpush %rdx\n'
-                    '\tpush %rcx\n')
-            case 'drop':
-                add('\tpop %rdx\n')
+    append('\tpush %rcx\n')
 
 
-            # TODO check if any conflicts between operations use of registers
+def identify_commands():
+    global commands
 
-# TODO print : .s
+    with open(input_file) as file:
+        lines_raw = file.readlines()
+        for i in range(len(lines_raw)):
+            lines_raw[i] = lines_raw[i].replace('\n', ' ')
+            commands.append(lines_raw[i].split())
 
-# exit
-add('\tmov $60, %rax\n'
-    '\tpop %rdi\n'
-    '\tsyscall\n')
+    commands = list(numpy.concatenate(commands).flat)
+
+
+def main():
+    # output file init
+    with open(output_file, 'w') as file:
+        file.write('\n'
+                   '.section .text\n'
+                   '.globl _start\n'
+                   '\n'
+                   '_start:\n')
+
+    identify_commands()
+
+    # checking the dictionary
+    for i in commands:
+        if str(i).isdigit():
+            append('\tpush $' + i + '\n')
+        elif str(i) in '+-*':
+            operations(str(i))
+        else:
+            match str(i):
+                case 'dup':
+                    append('\tpop %rdx\n'
+                           '\tpush %rdx\n'
+                           '\tpush %rdx\n')
+                case 'swap':
+                    append('\tpop %rdx\n'
+                           '\tpop %rcx\n'
+                           '\tpush %rdx\n'
+                           '\tpush %rcx\n')
+                case 'drop':
+                    append('\tpop %rdx\n')
+
+                # TODO check if any conflicts between operations use of registers
+
+                # TODO print : .s
+
+    # exit
+    append('\tmov $60, %rax\n'
+           '\tpop %rdi\n'
+           '\tsyscall\n')
+
+
+# command-line run with 1 argument
+if len(sys.argv) > 1:
+    input_file = sys.argv[1]
+else:
+    input_file = 'app.txt'
+output_file = input_file.split('.')[0] + '.s'
+
+# start
+main()
 
 # TODO os.system()
-os.system('as -o ' + outputFile.split('.')[0] + '.o' + outputFile)
-os.system('ld -o ' + outputFile.split('.')[0] + ' ' + outputFile.split('.')[0] + '.o')
-
+os.system('as -o ' + output_file.split('.')[0] + '.o' + output_file)
+os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o')
