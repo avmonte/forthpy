@@ -40,7 +40,6 @@ def main():
     # output file init
     with open(output_file, 'w') as file:
         file.write('\n'
-                   '.section .text\n'
                    '.globl _start\n'
                    '\n'
                    '_start:\n')
@@ -67,7 +66,11 @@ def main():
                 case 'drop':
                     append('\tpop %rdx\n')
                 case '.s':
-                    append('\tmov %rsp, %rdi\n'
+                    append('\tmov %rsp, %rsi\n'
+                           '\t.fmt:\n'
+                           '\t\t.asciz "%d\n"\n'
+                           '\t.text\n'
+                           '\tmov %.fmt, %rdi\n'
                            '\tcall printf\n')
 
                 # TODO print : .s
