@@ -40,6 +40,8 @@ def main():
     identify_commands()
 
     # output file init
+    with open(output_file, 'w') as file:
+        file.write('')
     if '.h' in commands:
         append('.fmt:\n'
                '\t.asciz "%d\\n"\n'
