@@ -1,25 +1,24 @@
 # forthcompilerpy
 
-A final project for CS130: Computer Organization class at American University of Armenia, Fall 2022
+A final project for CS130: Computer Organization, *American University of Armenia*, Fall 2022
 
-Author: Gevorg Nersesian, gevorg_nersesyan@edu.aua.am
+Author: Gevorg Nersesian, gevorg_nersesyan@edu.aua.am    
 
 Supervisor: Norayr Chilingaryan, nchilingaryan@aua.am
 
 
 
-***Usage***
+## Usage
 
-Open a terminal windoe in a directory of your Forth file
+In a terminal window of a directory with your Forth file, type
+```bash
+python3 main.py [inputFileName].fs
+``` 
 
-Type ```python3 main.py [forthInputFileName].fs``` and press Enter to activate the compiler 
-
-In your current working directory you will find a folder with the raw files and an executable of the inputted Forth script
+In your the directory you will find an executable of the inputted Forth script and a folder with the raw files (object and assembly files)a
 
 
-***Dictionary***
-
-Note, that Forth is stack-oriented.
+## Dictionary
 
 Integers are just being pushed to the head of the stack
 
