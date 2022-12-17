@@ -36,12 +36,30 @@ def identify_commands():
     commands = list(numpy.concatenate(commands).flat)
 
 
+def create_exe():
+    # creating the executable
+    os.system('as -o ' + output_file.split('.')[0] + '.o ' + output_file)
+    extra = ''
+    if '.h' in commands:
+        extra = ' -lc -dynamic-linker /lib64/ld-linux-x86-64.so.2'
+    os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o' + extra)
+
+    # cleaning up the folder, separating object and assembly files to a raw data folder
+    os.system('rm -r ' + output_file.split('.')[0] + '_raw')
+    os.system('mkdir ' + output_file.split('.')[0] + '_raw')
+    os.rename(output_file.split('.')[0] + '.o', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.o')
+    os.rename(output_file.split('.')[0] + '.s', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.s')
+
+
 def main():
     identify_commands()
 
-    # output file init
+    # OUTPUT FILE INIT
+    # zeroing out the file in case if it already exists
     with open(output_file, 'w') as file:
         file.write('')
+
+    # file header
     if '.h' in commands:
         append('.fmt:\n'
                '\t.asciz "%d\\n"\n'
@@ -78,9 +96,7 @@ def main():
                            '\tmov $.fmt, %rdi\n'
                            '\tcall printf\n')
 
-                # TODO print : .s
-
-    # exit
+    # exit instructions
     append('\tmov $60, %rax\n'
            '\tpop %rdi\n'
            '\tsyscall\n')
@@ -96,15 +112,5 @@ output_file = input_file.split('.')[0] + '.s'
 # start
 main()
 
-# creation the executable
-os.system('as -o ' + output_file.split('.')[0] + '.o ' + output_file)
-
-extra = ''
-if '.h' in commands:
-    extra = ' -lc -dynamic-linker /lib64/ld-linux-x86-64.so.2'
-os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o' + extra)
-
-os.system('rm -r ' + output_file.split('.')[0] + '_raw')
-os.system('mkdir ' + output_file.split('.')[0] + '_raw')
-os.rename(output_file.split('.')[0] + '.o', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.o')
-os.rename(output_file.split('.')[0] + '.s', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.s')
+# create exe and clean up the folder
+create_exe()
