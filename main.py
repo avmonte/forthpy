@@ -74,9 +74,9 @@ def main():
                     append('\tpop %rdx\n'
                            '\tmov %rdx, %rsi\n'
                            '\tpush %rdx\n'
+                           '\txor %rax, %rax\n'
                            '\tmov $.fmt, %rdi\n'
-                           '\tcall printf\n'
-                           '\txor %rax, %rax\n')
+                           '\tcall printf\n')
 
                 # TODO print : .s
 
