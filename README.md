@@ -4,7 +4,7 @@ A final project for CS130: Computer Organization class at American University of
 
 Author: Gevorg Nersesian, gevorg_nersesyan@edu.aua.am
 
-Supervisor: Norayr Chilingaryan 
+Supervisor: Norayr Chilingaryan, nchilingaryan@aua.am
 
 The initial goal is to develop a Forth compiler with Python with basic dictionary. 
 
