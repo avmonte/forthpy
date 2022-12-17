@@ -12,7 +12,7 @@ The initial goal is to develop a Forth compiler with Python with basic dictionar
 
 Open a terminal windoe in a directory of yout forth file
 
-Use this ```python3 main.py [forthInputFile].fs``` to activate the compiler 
+Use this ```python3 main.py [forthInputFileName].fs``` to activate the compiler 
 
 In your currecnt working directory you will find a folder with the raw files ans an executable of the inputted forth script
 
