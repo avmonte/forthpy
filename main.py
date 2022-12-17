@@ -65,12 +65,14 @@ def main():
                            '\tpush %rcx\n')
                 case 'drop':
                     append('\tpop %rdx\n')
-                case '.s':
-                    append('\tmov %rsp, %rsi\n'
+                case '.h':
+                    append('\tpop %rdx\n'
+                           '\tmov %rdx, %rsi\n'
+                           '\tpush %rdx\n'
                            '\t.fmt:\n'
-                           '\t\t.asciz "%d\n"\n'
+                           '\t\t.asciz "%d\\n"\n'
                            '\t.text\n'
-                           '\tmov %.fmt, %rdi\n'
+                           '\tmov $.fmt, %rdi\n'
                            '\tcall printf\n')
 
                 # TODO print : .s
