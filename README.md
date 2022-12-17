@@ -6,7 +6,7 @@ Author: Gevorg Nersesian, gevorg_nersesyan@edu.aua.am
 
 Supervisor: Norayr Chilingaryan, nchilingaryan@aua.am
 
-The initial goal is to develop a Forth compiler with Python with basic dictionary. 
+
 
 ***Usage***
 
