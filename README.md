@@ -31,4 +31,4 @@ Integers are just being pushed to the head of the stack
 
 ```drop```: drops one element from the head of the stack
 
-```.h```: prints out an element at the head of the stack
+```.h```: prints out an element from the head of the stack
