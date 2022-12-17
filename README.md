@@ -15,7 +15,7 @@ In a terminal window of a directory with your Forth file, type
 python3 main.py [inputFileName].fs
 ``` 
 
-In your the directory you will find an executable of the inputted Forth script and a folder with the raw files (object and assembly files)a
+In your the directory you will find an executable of the inputted Forth script and a folder with the raw files (object and assembly files)
 
 
 ## Dictionary
