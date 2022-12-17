@@ -1,6 +1,6 @@
 # forthcompilerpy
 
-An on-going project for CS130: Computer Organization class at American University of Armenia, Fall 2022
+A project for CS130: Computer Organization class at American University of Armenia, Fall 2022
 
 Author: Gevorg Nersesian
 
