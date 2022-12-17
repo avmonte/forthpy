@@ -97,6 +97,6 @@ main()
 os.system('as -o ' + output_file.split('.')[0] + '.o ' + output_file)
 
 extra = ''
-if '.s' in commands:
+if '.h' in commands:
     extra = ' -lc -dynamic-linker /lib64/ld-linux-x86-64.so.2'
 os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o' + extra)
