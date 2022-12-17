@@ -90,7 +90,7 @@ def main():
 if len(sys.argv) > 1:
     input_file = sys.argv[1]
 else:
-    input_file = 'app.txt'
+    input_file = 'app.fs'
 output_file = input_file.split('.')[0] + '.s'
 
 # start
@@ -103,3 +103,7 @@ extra = ''
 if '.h' in commands:
     extra = ' -lc -dynamic-linker /lib64/ld-linux-x86-64.so.2'
 os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o' + extra)
+
+os.system('mkdir ' + output_file.split('.')[0] + '_raw')
+os.rename(output_file.split('.')[0] + '.o', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.o')
+os.rename(output_file.split('.')[0] + '.s', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.s')
