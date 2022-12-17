@@ -9,14 +9,18 @@ Supervisor: Norayr Chilingaryan
 The initial goal is to develop a Forth compiler with Python with basic dictionary. 
 
 
-Dictionary:
+***Dictionary***
 
-```~~~Integer numbers~~~```: push to the head of the stack
+Note, that Forth is stack-oriented.
 
-```+```, ```-```, ```*```: does the given operation on the elements at the head of the stack and pushes it
+Integers are just being pushed to the head of the stack
+
+```+```, ```-```, ```*```: does the given operation on elements and pushes the result to the the head of the stack
 
 ```dup```: duplicates an element at the head of the stack
+
 ```swap```: swaps elements at the head of the stack
+
 ```drop```: drops one element from the head of the stack
 
-```.h```: prints out an element at the head od the stack
+```.h```: prints out an element at the head of the stack
