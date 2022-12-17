@@ -5,21 +5,21 @@ import numpy
 commands = []
 
 
-def append(com, endline='\n'):
+def append(com, endblock='\n'):
     with open(output_file, 'a') as file:
-        file.write(com + endline)
+        file.write(com + endblock)
 
 
 def operations(command):
-    append('\tpop %rdx\n''\tpop %rcx\n', endline='')
+    append('\tpop %rdx\n''\tpop %rcx\n', endblock='')
 
     match command:
         case '+':
-            append('\tadd %rdx, %rcx\n', endline='')
+            append('\tadd %rdx, %rcx\n', endblock='')
         case '-':
-            append('\tsub %rdx, %rcx\n', endline='')
+            append('\tsub %rdx, %rcx\n', endblock='')
         case '*':
-            append('\timul %rdx, %rcx\n', endline='')
+            append('\timul %rdx, %rcx\n', endblock='')
 
     append('\tpush %rcx\n')
 
@@ -37,14 +37,17 @@ def identify_commands():
 
 
 def main():
-    # output file init
-    with open(output_file, 'w') as file:
-        file.write('\n'
-                   '.globl _start\n'
-                   '\n'
-                   '_start:\n')
-
     identify_commands()
+
+    # output file init
+    if '.h' in commands:
+        append('.fmt:\n'
+               '\t.asciz "%d\\n"\n'
+               '.text\n')
+    append('\n'
+           '.globl _start\n'
+           '\n'
+           '_start:\n')
 
     # checking the dictionary
     for i in commands:
@@ -69,11 +72,9 @@ def main():
                     append('\tpop %rdx\n'
                            '\tmov %rdx, %rsi\n'
                            '\tpush %rdx\n'
-                           '\t.fmt:\n'
-                           '\t\t.asciz "%d\\n"\n'
-                           '\t.text\n'
                            '\tmov $.fmt, %rdi\n'
-                           '\tcall printf\n')
+                           '\tcall printf\n'
+                           '\txor %rax, %rax\n')
 
                 # TODO print : .s
 
