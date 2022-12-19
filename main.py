@@ -43,14 +43,10 @@ def create_exe():
     extra = ''
     if '.h' in commands:
         extra = ' -lc -dynamic-linker /lib64/ld-linux-x86-64.so.2'
-    # os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o' + extra)
     os.system(f"ld -o {output_file_name} {output_file_name}.o{extra}")
 
     # cleaning up the folder, separating object and assembly files to a raw data folder
-    os.system(f"rm -r {output_file_name}_raw")
-    os.system(f"mkdir {output_file_name}_raw")
-    # os.rename(output_file.split('.')[0] + '.o', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.o')
-    # os.rename(output_file.split('.')[0] + '.s', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.s')
+    os.system(f"rm -r {output_file_name}_raw")  # TODO error raised when folder does not exist
     os.rename(f"{output_file_name}.o", f"{output_file_name}_raw/{output_file_name}.o")
     os.rename(f"{output_file_name}.s", f"{output_file_name}_raw/{output_file_name}.s")
 
