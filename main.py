@@ -38,17 +38,21 @@ def identify_commands():
 
 def create_exe():
     # creating the executable
-    os.system('as -o ' + output_file.split('.')[0] + '.o ' + output_file)
+    output_file_name = output_file.split('.')[0]
+    os.system(f"as -o {output_file_name}.o {output_file}")
     extra = ''
     if '.h' in commands:
         extra = ' -lc -dynamic-linker /lib64/ld-linux-x86-64.so.2'
-    os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o' + extra)
+    # os.system('ld -o ' + output_file.split('.')[0] + ' ' + output_file.split('.')[0] + '.o' + extra)
+    os.system(f"ld -o {output_file_name} {output_file_name}.o{extra}")
 
     # cleaning up the folder, separating object and assembly files to a raw data folder
-    os.system('rm -r ' + output_file.split('.')[0] + '_raw')
-    os.system('mkdir ' + output_file.split('.')[0] + '_raw')
-    os.rename(output_file.split('.')[0] + '.o', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.o')
-    os.rename(output_file.split('.')[0] + '.s', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.s')
+    os.system(f"rm -r {output_file_name}_raw")
+    os.system(f"mkdir {output_file_name}_raw")
+    # os.rename(output_file.split('.')[0] + '.o', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.o')
+    # os.rename(output_file.split('.')[0] + '.s', output_file.split('.')[0] + '_raw/' + output_file.split('.')[0] + '.s')
+    os.rename(f"{output_file_name}.o", f"{output_file_name}_raw/{output_file_name}.o")
+    os.rename(f"{output_file_name}.s", f"{output_file_name}_raw/{output_file_name}.s")
 
 
 def main():
@@ -95,11 +99,17 @@ def main():
                            '\txor %rax, %rax\n'
                            '\tmov $.fmt, %rdi\n'
                            '\tcall printf\n')
+                case _:
+                    os.system(f"rm {output_file}")
+                    print(f"Invalid syntax: '{str(i)}'")
+                    return False
 
     # exit instructions
     append('\tmov $60, %rax\n'
            '\tpop %rdi\n'
            '\tsyscall\n')
+
+    return True
 
 
 # command-line run with 1 argument
@@ -110,7 +120,6 @@ else:
 output_file = input_file.split('.')[0] + '.s'
 
 # start
-main()
-
-# create exe and clean up the folder
-create_exe()
+if main():
+    # create exe and clean up the folder
+    create_exe()
