@@ -41,7 +41,7 @@ def create_exe():
     output_file_name = output_file.split('.')[0]
     os.system(f"as -o {output_file_name}.o {output_file}")
     extra = ''
-    if '.h' in commands:
+    if '.' in commands:
         extra = ' -lc -dynamic-linker /lib64/ld-linux-x86-64.so.2'
     os.system(f"ld -o {output_file_name} {output_file_name}.o{extra}")
 
@@ -61,7 +61,7 @@ def main():
         file.write('')
 
     # file header
-    if '.h' in commands:
+    if '.' in commands:
         append('.fmt:\n'
                '\t.asciz "%d\\n"\n'
                '.text\n')
@@ -89,7 +89,7 @@ def main():
                            '\tpush %rcx\n')
                 case 'drop':
                     append('\tpop %rdx\n')
-                case '.h':
+                case '.':
                     append('\tpop %rdx\n'
                            '\tmov %rdx, %rsi\n'
                            '\tpush %rdx\n'
