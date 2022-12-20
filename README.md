@@ -20,14 +20,14 @@ In your the directory you will find an executable of the inputted Forth script a
 
 ## Dictionary
 
-Integers are just being pushed to the head of the stack
+Integers are just being pushed to the top of the stack
 
-```+```, ```-```, ```*```: does the given operation on elements and pushes the result to the the head of the stack
+```+```, ```-```, ```*```: does the given operation on elements and pushes the result to the the top of the stack
 
-```dup```: duplicates an element at the head of the stack
+```dup```: duplicates an element at the top of the stack
 
-```swap```: swaps elements at the head of the stack
+```swap```: swaps elements at the top of the stack
 
-```drop```: drops one element from the head of the stack
+```drop```: drops one element from the top of the stack
 
-```.```: prints out an element from the head of the stack
+```.```: prints out an element from the top of the stack
