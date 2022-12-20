@@ -79,7 +79,7 @@ def main():
         elif str(i) in ['/', 'mod']:
             append('\tpop %rcx\n'
                    '\tpop %rax\n'
-                   '\tidiv $rcx\n', endblock='')
+                   '\tidiv %rcx\n', endblock='')
             if str(i) == '/':
                 append('\tpush %rax\n')
             else:
