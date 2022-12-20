@@ -47,6 +47,7 @@ def create_exe():
 
     # cleaning up the folder, separating object and assembly files to a raw data folder
     os.system(f"rm -r {output_file_name}_raw")  # TODO error raised when folder does not exist
+    os.system(f"mkdir {output_file_name}_raw")
     os.rename(f"{output_file_name}.o", f"{output_file_name}_raw/{output_file_name}.o")
     os.rename(f"{output_file_name}.s", f"{output_file_name}_raw/{output_file_name}.s")
 
