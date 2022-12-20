@@ -20,8 +20,6 @@ def operations(command):
             append('\tsub %rdx, %rcx\n', endblock='')
         case '*':
             append('\timul %rdx, %rcx\n', endblock='')
-        case '/':
-            append('\tidiv %rdx, %rcx\n', endblock='')
 
     append('\tpush %rcx\n')
 
@@ -76,8 +74,16 @@ def main():
     for i in commands:
         if str(i).isdigit():
             append('\tpush $' + i + '\n')
-        elif str(i) in '+-*/':
+        elif str(i) in '+-*':
             operations(str(i))
+        elif str(i) in ['/', 'mod']:
+            append('\tpop %rcx\n'
+                   '\tpop %rax\n'
+                   '\tidiv $rcx\n', endblock='')
+            if str(i) == '/':
+                append('\tpush %rax\n')
+            else:
+                append('\tpush %rdx\n')
         else:
             match str(i):
                 case 'dup':
