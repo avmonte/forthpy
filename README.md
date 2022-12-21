@@ -22,7 +22,9 @@ In your the directory you will find an executable of the inputted Forth script a
 
 Integers are just being pushed to the top of the stack
 
-```+```, ```-```, ```*```: does the given operation on elements and pushes the result to the the top of the stack
+```+```, ```-```, ```*```, ```/```: does the given operation on elements and pushes the result to the the top of the stack
+
+```mod```: calculates the reminder of division of two elements and pushes the result to the the top of the stack
 
 ```dup```: duplicates an element at the top of the stack
 
