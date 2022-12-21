@@ -34,4 +34,4 @@ Integers are just being pushed to the top of the stack
 
 ```.```: prints out an element from the top of the stack
 
-```\[comment]```: this is a comment, it is just ignored by the compiler, not transfered to the .s (assembly) file
+```\[comment]```: this is a comment, it is ignored by the compiler, not transfered to the .s (assembly) file
