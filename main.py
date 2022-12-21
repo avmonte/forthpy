@@ -32,8 +32,9 @@ def identify_commands():
         for i in range(len(lines_raw)):
             # removing comments
             for j in range(len(lines_raw[i])):
-                if j == '\\':
+                if lines_raw[i][j] == '\\':
                     lines_raw[i] = lines_raw[i][:j]
+                    break
             # removing \n \t and spaces
             commands.append(lines_raw[i].split())
 
