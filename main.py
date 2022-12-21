@@ -30,7 +30,11 @@ def identify_commands():
     with open(input_file) as file:
         lines_raw = file.readlines()
         for i in range(len(lines_raw)):
-            lines_raw[i] = lines_raw[i].replace('\n', ' ')
+            # removing comments
+            for j in range(len(lines_raw[i])):
+                if j == '\\':
+                    lines_raw[i] = lines_raw[i][:j]
+            # removing \n \t and spaces
             commands.append(lines_raw[i].split())
 
     commands = list(numpy.concatenate(commands).flat)
