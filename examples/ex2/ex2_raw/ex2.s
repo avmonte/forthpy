@@ -7,9 +7,15 @@
 
 _start:
 
-	push $7
+	push $17
 
-	push $9
+	push $5
+
+	pop %rcx
+	pop %rax
+	cqo
+	idiv %rcx
+	push %rax
 
 	pop %rdx
 	mov %rdx, %rsi
@@ -18,14 +24,17 @@ _start:
 	mov $.fmt, %rdi
 	call printf
 
+	push $2
+
+	push $137
+
 	pop %rdx
 
-	push $5
-
-	pop %rdx
 	pop %rcx
-	imul %rdx, %rcx
-	push %rcx
+	pop %rax
+	cqo
+	idiv %rcx
+	push %rdx
 
 	pop %rdx
 	mov %rdx, %rsi
