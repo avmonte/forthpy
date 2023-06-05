@@ -2,7 +2,7 @@
 
 A final project for CS130: Computer Organization, *American University of Armenia*, Fall 2022
 
-Author: Gevorg Nersesian, gevorg_nersesyan@edu.aua.am    
+Author: Gevorg Nersesian, gevorg_nersesian@edu.aua.am    
 
 Supervisor: Norayr Chilingaryan, nchilingaryan@aua.am
 
