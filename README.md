@@ -1,4 +1,4 @@
-# forthcompilerpy
+# forthpy
 
 A final project for CS130: Computer Organization, *American University of Armenia*, Fall 2022
 
